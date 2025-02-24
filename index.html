@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Para Maylen 💖</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <div class="hearts-border">
+            <h1>Para Maylen <span class="rotate-heart">💖</span></h1>
+            <div class="message">
+                Eres la persona más dulce, amable y hermosa que conozco.<br>
+                Cada día contigo es una bendición llena de alegría y amor.<br>
+                Gracias por ser tú y por ser mía.<br>
+                ¡Te amo más de lo que las palabras pueden expresar!
+            </div>
+            <button class="button" id="showMessage">Haz Clic Para Un Mensaje Sorpresa</button>
+            <button class="button" id="showMore">Una Sorpresa Más</button>
+            
+            <div class="photo-frame">
+                <img src="pic.jpeg" alt="Nuestra foto favorita" style="width: 100%; height: 100%; object-fit: cover;">
+            </div>
+        </div>
+    </div>
+
+    <div class="heart-container" id="heartContainer"></div>
+    
+    <div class="popup" id="popup">
+        <div class="popup-close" id="popupClose">×</div>
+        <div class="popup-content">
+            <h2>Mi Querida Maylen 💘</h2>
+            <p>Si pudiera darte una cosa en la vida, te daría la capacidad de verte a través de mis ojos...</p>
+            <p>Solo entonces te darías cuenta de lo especial que eres para mí.</p>
+            <p>Por siempre tuyo,</p>
+            <p style="font-size: 1.5rem;">💖💖💖</p>
+        </div>
+    </div>
+
+    <script>
+        // Initialize floating hearts
+        function createInitialHearts() {
+            const heartContainer = document.getElementById('heartContainer');
+            const heartSymbols = ['❤️', '💖', '💕', '💗', '💓', '💘', '💝'];
+            const numHearts = 20;
+
+            for (let i = 0; i < numHearts; i++) {
+                const heart = document.createElement('div');
+                heart.className = 'heart';
+                heart.textContent = heartSymbols[Math.floor(Math.random() * heartSymbols.length)];
+                heart.style.left = `${Math.random() * 100}vw`;
+                heart.style.top = `${Math.random() * 100}vh`;
+                heart.style.animationDuration = `${5 + Math.random() * 10}s`;
+                heart.style.animationDelay = `${Math.random() * 5}s`;
+                heartContainer.appendChild(heart);
+            }
+        }
+
+        // Create flying hearts on click
+        document.addEventListener('click', function(event) {
+            const heartContainer = document.getElementById('heartContainer');
+            const heart = document.createElement('div');
+            heart.className = 'click-heart';
+            heart.textContent = '💖';
+            heart.style.left = `${event.clientX}px`;
+            heart.style.top = `${event.clientY}px`;
+            heartContainer.appendChild(heart);
+            
+            // Remove heart after animation completes
+            setTimeout(() => {
+                heart.remove();
+            }, 2000);
+        });
+
+        // Show message button
+        document.getElementById('showMessage').addEventListener('click', function() {
+            document.querySelector('.message').classList.add('show-message');
+            this.textContent = "¡Te Amo, Maylen!";
+        });
+
+        // Show additional surprise
+        document.getElementById('showMore').addEventListener('click', function() {
+            document.getElementById('popup').classList.add('show');
+        });
+
+        // Close popup
+        document.getElementById('popupClose').addEventListener('click', function() {
+            document.getElementById('popup').classList.remove('show');
+        });
+
+        // Initialize
+        window.onload = function() {
+            createInitialHearts();
+        };
+    </script>
+</body>
+</html>
